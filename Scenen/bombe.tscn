@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw0g7dlxmcgym"]
+
+[ext_resource type="Script" path="res://Scenen/bombe.gd" id="1_0w23k"]
+[ext_resource type="Texture2D" uid="uid://dbebgsxwvi8uu" path="res://Assets/Nuke.png" id="1_uni5h"]
+[ext_resource type="AudioStream" uid="uid://bwdeybgn74igu" path="res://Assets/Nuke.ogg" id="3_it60i"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23l0c"]
+radius = 21.0
+height = 96.0
+
+[node name="Bombe" type="Area2D"]
+script = ExtResource("1_0w23k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_23l0c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.0462198, 0.0462198)
+texture = ExtResource("1_uni5h")
+
+[node name="LevelOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_it60i")
+volume_db = -18.57
+
+[connection signal="body_entered" from="." to="." method="Finished"]

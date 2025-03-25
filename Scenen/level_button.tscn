@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwlqndocw2oc8"]
+
+[ext_resource type="Script" path="res://Scenen/level_button.gd" id="1_nk05m"]
+[ext_resource type="Texture2D" uid="uid://0obcypwwgbwt" path="res://Assets/ButtonNormal.png" id="2_1m3uc"]
+[ext_resource type="Texture2D" uid="uid://kdlsnb00bswk" path="res://Assets/ButtonHover.png" id="3_m53x8"]
+
+[node name="LevelButton" type="Node2D"]
+script = ExtResource("1_nk05m")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.239999, 0.239999)
+texture_normal = ExtResource("2_1m3uc")
+texture_hover = ExtResource("3_m53x8")
+
+[node name="Text" type="RichTextLabel" parent="TextureButton"]
+layout_mode = 0
+offset_top = 66.667
+offset_right = 40.0
+offset_bottom = 106.667
+scale = Vector2(12.6463, 12.6668)
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+
+[connection signal="button_down" from="TextureButton" to="." method="OnButtonPress"]
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_button_mouse_entered"]

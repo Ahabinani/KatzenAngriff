@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://tlty8befivth"]
+
+[ext_resource type="Script" path="res://LevelAuswahl.gd" id="1_i4ky2"]
+[ext_resource type="AudioStream" uid="uid://bvwg2xkg38tyy" path="res://Assets/MenuBackground.ogg" id="2_h4hwh"]
+[ext_resource type="Shader" path="res://Scenen/bg.gdshader" id="2_h55v7"]
+[ext_resource type="Shader" path="res://Scenen/main_menu.gdshader" id="2_q8isp"]
+[ext_resource type="Texture2D" uid="uid://biehsrk3lg53f" path="res://Assets/MenuBackground.png" id="3_v0582"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnoo3"]
+shader = ExtResource("2_h55v7")
+shader_parameter/direction = Vector2(0.1, 0)
+shader_parameter/speed = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sunpd"]
+resource_local_to_scene = true
+shader = ExtResource("2_q8isp")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed = 0.1
+
+[node name="LevelAuswahl" type="Node2D"]
+script = ExtResource("1_i4ky2")
+
+[node name="BackNoise" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xnoo3")
+offset_right = 1283.0
+offset_bottom = 731.0
+color = Color(0.0444646, 0.0506443, 0.0765472, 1)
+
+[node name="BackGround" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_sunpd")
+offset_left = 136.0
+offset_right = 3644.0
+offset_bottom = 2480.0
+scale = Vector2(0.279999, 0.279999)
+texture = ExtResource("3_v0582")
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 280.0
+offset_top = 38.0
+offset_right = 458.0
+offset_bottom = 110.0
+text = "BACK"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_h4hwh")
+volume_db = -20.0
+autoplay = true
+
+[node name="ButtonSounds" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[connection signal="button_down" from="BackButton" to="." method="OnBackPress"]
+[connection signal="mouse_entered" from="BackButton" to="." method="ButtonHover"]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://b80ifeh60pbib"]
+
+[ext_resource type="Script" path="res://Schleuder.gd" id="1_b6wg2"]
+[ext_resource type="Texture2D" uid="uid://cs4kwx1350dp5" path="res://Assets/Footing.png" id="2_2t42q"]
+[ext_resource type="Texture2D" uid="uid://c0wswu540ktjc" path="res://Assets/Barrel.png" id="3_7w6y1"]
+[ext_resource type="Shader" path="res://Scenen/Stern.gdshader" id="4_0rlyh"]
+[ext_resource type="Texture2D" uid="uid://nycovrh4rwy8" path="res://Assets/Star.png" id="4_wlunb"]
+[ext_resource type="AudioStream" uid="uid://bqfm866yv8eh8" path="res://Assets/Cannon_Move.ogg" id="6_gim88"]
+[ext_resource type="AudioStream" uid="uid://k0vifym47xjx" path="res://Assets/Cannon_fire.mp3" id="7_ln64q"]
+
+[sub_resource type="Gradient" id="Gradient_tjjn2"]
+offsets = PackedFloat32Array(0, 0.513333, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.719163, 0, 0.016755, 1, 0.815686, 0.752941, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppw7s"]
+shader = ExtResource("4_0rlyh")
+shader_parameter/Charge = 30.0
+
+[node name="Schleuder" type="Node2D"]
+scale = Vector2(0.12, 0.12)
+script = ExtResource("1_b6wg2")
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(0, 225)
+texture = ExtResource("2_2t42q")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+z_index = 5
+scale = Vector2(0.70832, 0.70832)
+texture = ExtResource("3_7w6y1")
+offset = Vector2(270, -65)
+
+[node name="Particles" type="CPUParticles2D" parent="Barrel"]
+position = Vector2(717.66, 0.000157079)
+emitting = false
+amount = 100
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.89
+randomness = 0.31
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 24.27
+gravity = Vector2(0, 120)
+initial_velocity_min = 1000.0
+initial_velocity_max = 10000.0
+scale_amount_max = 10.1
+color_initial_ramp = SubResource("Gradient_tjjn2")
+hue_variation_min = -0.44
+hue_variation_max = 0.39
+
+[node name="Star" type="Sprite2D" parent="."]
+z_index = 6
+material = SubResource("ShaderMaterial_ppw7s")
+scale = Vector2(0.668293, 0.668293)
+texture = ExtResource("4_wlunb")
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_gim88")
+volume_db = -20.599
+pitch_scale = 1.61
+
+[node name="FireSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ln64q")
+volume_db = -25.297
